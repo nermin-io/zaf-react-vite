@@ -6,6 +6,10 @@ html, body {
   height: 100%;
 }
 
+body {
+  padding: 4px;
+}
+
 a {
   cursor: pointer;
 }

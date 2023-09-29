@@ -81,6 +81,10 @@ export function zendeskPlugin() {
         src: "README.md",
         dest: "../",
       },
+      {
+        src: "src/zcli.apps.config.json",
+        dest: "../",
+      },
     ],
   });
 }

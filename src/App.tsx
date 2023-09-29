@@ -1,21 +1,43 @@
-import { useEffect } from "react";
-import { zafClient } from "./sdk/zafClient.ts";
 import { Button } from "@zendeskgarden/react-buttons";
+import { Col, Grid, Row } from "@zendeskgarden/react-grid";
+import {
+  Combobox,
+  Field,
+  Label,
+  Option,
+} from "@zendeskgarden/react-dropdowns.next";
+import { useResizeContainer } from "./hooks/useResizeContainer.ts";
+import { useAdjustableHeight } from "./hooks/useAdjustableHeight.ts";
+import { ResizeHandle } from "./components/handles.ts";
 
 function App() {
-  useEffect(() => {
-    zafClient.invoke("resize", { height: "500px", width: "100%" });
-  }, []);
+  const { height, register } = useAdjustableHeight({ initial: 500 });
+  useResizeContainer({ height: height, width: "100%" });
 
   return (
     <div>
-      <Button
-        isPrimary
-        isStretched
-        onClick={() => zafClient.invoke("routeTo", "ticket", "new")}
-      >
-        Create Ticket
-      </Button>
+      <Grid gutters={false}>
+        <Row justifyContent="center">
+          <Col sm={5}>
+            <Field>
+              <Label>Houseplant</Label>
+              <Combobox isEditable={false}>
+                <Option value="Fern" isSelected />
+                <Option value="Rubber tree" />
+                <Option value="Snake plant" />
+              </Combobox>
+            </Field>
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={5}>
+            <Button isPrimary isStretched>
+              Create Ticket
+            </Button>
+          </Col>
+        </Row>
+      </Grid>
+      <ResizeHandle {...register()} />
     </div>
   );
 }
