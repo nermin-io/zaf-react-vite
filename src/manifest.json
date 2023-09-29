@@ -1,0 +1,16 @@
+{
+  "name": "Example",
+  "author": {
+    "name": "Nermin",
+    "email": "nermin@rendr.delivery"
+  },
+  "defaultLocale": "en",
+  "private": true,
+  "location": {
+    "support": {
+      "ticket_sidebar": "http://localhost:5173"
+    }
+  },
+  "version": "1.0.0",
+  "frameworkVersion": "2.0"
+}
