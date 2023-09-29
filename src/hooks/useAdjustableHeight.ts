@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDebouncedValue } from "./useDebounceValue.ts";
 
 export interface UseAdjustableHeightOptions {
   initial: number;
@@ -6,12 +7,28 @@ export interface UseAdjustableHeightOptions {
   minHeight?: number;
 }
 
+const STORAGE_KEY = "APP_HEIGHT";
+
+function getInitialHeight(initial: number) {
+  const height = localStorage.getItem(STORAGE_KEY);
+  if (!height) {
+    return initial;
+  }
+
+  return parseInt(height);
+}
+
 export function useAdjustableHeight({
   initial,
   maxHeight = 500,
   minHeight = 200,
 }: UseAdjustableHeightOptions) {
-  const [height, setHeight] = useState(initial);
+  const [height, setHeight] = useState(getInitialHeight(initial));
+  const debouncedHeight = useDebouncedValue(height);
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, debouncedHeight.toString());
+  }, [debouncedHeight]);
 
   const handleResize = (e: MouseEvent) => {
     if (e.clientY < maxHeight && e.clientY >= minHeight) {

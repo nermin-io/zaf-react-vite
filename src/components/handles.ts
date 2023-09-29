@@ -10,6 +10,7 @@ export const ResizeHandle = styled.div`
   bottom: 0;
   border-radius: 5px;
   cursor: ns-resize;
+  transition: background-color 0.15s ease-in;
 
   &:hover {
     background-color: #e1e1e1;

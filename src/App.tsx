@@ -11,7 +11,10 @@ import { useAdjustableHeight } from "./hooks/useAdjustableHeight.ts";
 import { ResizeHandle } from "./components/handles.ts";
 
 function App() {
-  const { height, register } = useAdjustableHeight({ initial: 500 });
+  const { height, register } = useAdjustableHeight({
+    initial: 500,
+    maxHeight: 700,
+  });
   useResizeContainer({ height: height, width: "100%" });
 
   return (
