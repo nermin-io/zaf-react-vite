@@ -9,9 +9,13 @@
     "dev:serve": "zcli apps:server src --logs",
     "prod:serve": "zcli apps:server dist --logs",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "package": "yarn build && zcli apps:package dist"
   },
   "dependencies": {
+    "@zendeskgarden/css-bedrock": "^9.1.1",
+    "@zendeskgarden/react-buttons": "^8.71.0",
+    "@zendeskgarden/react-theming": "^8.71.0",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

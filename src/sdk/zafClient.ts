@@ -9,7 +9,7 @@ interface IMetadata<T> {
 }
 
 interface IClient {
-  invoke: <T>(cmd: string, arg: T) => void;
+  invoke: <T>(cmd: string, ...args: T[]) => void;
   get: <T>(getter: string) => T;
   metadata: <U>() => IMetadata<U>;
   request: <U>(data: Record<string, unknown>) => Promise<U>;
