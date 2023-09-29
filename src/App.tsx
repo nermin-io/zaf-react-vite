@@ -4,17 +4,19 @@ import { Button } from "@zendeskgarden/react-buttons";
 
 function App() {
   useEffect(() => {
-    zafClient.invoke("resize", { height: "400px", width: "100%" });
+    zafClient.invoke("resize", { height: "500px", width: "100%" });
   }, []);
 
   return (
-    <Button
-      isPrimary
-      isStretched
-      onClick={() => zafClient.invoke("routeTo", "ticket", "new")}
-    >
-      Create new ticket
-    </Button>
+    <div>
+      <Button
+        isPrimary
+        isStretched
+        onClick={() => zafClient.invoke("routeTo", "ticket", "new")}
+      >
+        Create Ticket
+      </Button>
+    </div>
   );
 }
 

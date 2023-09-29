@@ -1,1 +1,11 @@
 @import '@zendeskgarden/css-bedrock';
+
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+}
+
+a {
+  cursor: pointer;
+}
