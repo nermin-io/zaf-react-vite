@@ -1,5 +1,5 @@
 import { ResizeHandle } from "./components/handles.ts";
-import { useResizeableContainer } from "./hooks/useAdjustableHeight.ts";
+import { useResizeableContainer } from "./hooks/useResizableContainer.ts";
 
 function App() {
   const { register } = useResizeableContainer({
