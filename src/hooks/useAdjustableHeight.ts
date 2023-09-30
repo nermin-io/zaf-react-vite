@@ -1,32 +1,54 @@
 import { useEffect, useState } from "react";
 import { useDebouncedValue } from "./useDebouncedValue.ts";
+import { zafClient } from "../lib/zendesk/zafClient.ts";
 
-export interface UseAdjustableHeightOptions {
-  initial: number;
+export interface UseResizeContainerParams {
+  defaultHeight: number;
+  width?: string;
   maxHeight?: number;
   minHeight?: number;
+  debounce?: number;
 }
 
 const STORAGE_KEY = "APP_HEIGHT";
 
-function getInitialHeight(initial: number) {
+function getPersistedHeightOrDefault(defaultHeight: number) {
   const height = localStorage.getItem(STORAGE_KEY);
   if (!height) {
-    return initial;
+    return defaultHeight;
   }
 
   return parseInt(height);
 }
 
-export function useAdjustableHeight({
-  initial,
+function toDimensionString(amount: string | number) {
+  if (typeof amount === "number") {
+    return amount + "px";
+  }
+
+  return amount;
+}
+
+export function useResizeableContainer({
+  defaultHeight,
+  width = "100%",
   maxHeight = 500,
   minHeight = 200,
-}: UseAdjustableHeightOptions) {
-  const [height, setHeight] = useState(getInitialHeight(initial));
-  const debouncedHeight = useDebouncedValue(height, 500);
+  debounce = 500,
+}: UseResizeContainerParams) {
+  const [height, setHeight] = useState(
+    getPersistedHeightOrDefault(defaultHeight)
+  );
+  const debouncedHeight = useDebouncedValue(height, debounce);
 
-  const isAdjusting = height !== debouncedHeight;
+  const isResizing = height !== debouncedHeight;
+
+  useEffect(() => {
+    zafClient.invoke("resize", {
+      height: toDimensionString(height),
+      width: width,
+    });
+  }, [height, width]);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, debouncedHeight.toString());
@@ -52,5 +74,5 @@ export function useAdjustableHeight({
     };
   };
 
-  return { height, register, isAdjusting };
+  return { register, isResizing, height };
 }
