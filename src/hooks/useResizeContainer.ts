@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { zafClient } from "../sdk/zafClient.ts";
+import { zafClient } from "../lib/zendesk/zafClient.ts";
 
 export interface UseResizeContainerOptions {
   height: string | number;
