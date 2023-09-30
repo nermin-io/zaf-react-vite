@@ -6,7 +6,7 @@ export interface UseResizeContainerOptions {
   width: string | number;
 }
 
-function dimensionString(amount: string | number) {
+function ensureDimensionString(amount: string | number) {
   if (typeof amount === "number") {
     return amount + "px";
   }
@@ -14,11 +14,17 @@ function dimensionString(amount: string | number) {
   return amount;
 }
 
-export function useResizeContainer(opts: UseResizeContainerOptions) {
-  const height = dimensionString(opts.height);
-  const width = dimensionString(opts.width);
+export function useResizeContainer({
+  height,
+  width,
+}: UseResizeContainerOptions) {
+  const h = ensureDimensionString(height);
+  const w = ensureDimensionString(width);
 
   useEffect(() => {
-    zafClient.invoke("resize", { height: height, width: width });
-  }, [height, width]);
+    zafClient.invoke("resize", {
+      height: h,
+      width: w,
+    });
+  }, [h, w]);
 }

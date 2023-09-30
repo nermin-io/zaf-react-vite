@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDebouncedValue } from "./useDebounceValue.ts";
+import { useDebouncedValue } from "./useDebouncedValue.ts";
 
 export interface UseAdjustableHeightOptions {
   initial: number;
@@ -24,7 +24,9 @@ export function useAdjustableHeight({
   minHeight = 200,
 }: UseAdjustableHeightOptions) {
   const [height, setHeight] = useState(getInitialHeight(initial));
-  const debouncedHeight = useDebouncedValue(height);
+  const debouncedHeight = useDebouncedValue(height, 500);
+
+  const isAdjusting = height !== debouncedHeight;
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, debouncedHeight.toString());
@@ -50,5 +52,5 @@ export function useAdjustableHeight({
     };
   };
 
-  return { height, register };
+  return { height, register, isAdjusting };
 }
