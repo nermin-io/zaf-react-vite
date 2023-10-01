@@ -1,0 +1,8 @@
+{
+  "ticket_fields": {
+    "deliveryId": {
+      "type": "text",
+      "title": "The ID of the associated delivery"
+    }
+  }
+}

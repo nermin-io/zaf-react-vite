@@ -85,6 +85,10 @@ export function zendeskPlugin() {
         src: "src/zcli.apps.config.json",
         dest: "../",
       },
+      {
+        src: "src/requirements.json",
+        dest: "../",
+      },
     ],
   });
 }
