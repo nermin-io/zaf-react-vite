@@ -1,15 +1,9 @@
-import { ResizeHandle } from "./components/handles.ts";
-import { useResizeableContainer } from "./hooks/useResizableContainer.ts";
+import { Button } from "@/components/ui/button.tsx";
 
 function App() {
-  const { register } = useResizeableContainer({
-    defaultHeight: 500,
-    maxHeight: 1000,
-  });
-
   return (
     <div>
-      <ResizeHandle {...register()} />
+      <Button>Hello</Button>
     </div>
   );
 }
